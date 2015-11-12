@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单提交</title>
+</head>
+<body>
+	<h1><a href="http://127.0.0.1:8000/" target="_blank">跳转</a></h1>
+	<form action="http://127.0.0.1:8000/process_get" method="get" accept-charset="utf-8">
+		<label for="name1">
+			姓名:
+			<input type="text" id="name1" name="f_name">
+		</label>
+		<br>
+		<label for="pwd">
+			密码:
+			<input type="password" id="pwd" name="password">
+		</label>
+		<br>
+		<textarea name="textarea" rows="3" cols="6"></textarea>
+		<br>
+		<input type="submit" value="提交">
+	</form>
+</body>
+</html>
