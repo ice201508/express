@@ -1,11 +1,14 @@
 
 ## nodejs+express快速搭建电影网站
 
+[TOC]
+
 ### 学习不会的东西优先上官网看API
 
 [Express API](http://www.expressjs.com.cn/)
 [Jade官网](http://jade.tilab.com/)
 [Jade 引擎](http://jade-lang.com/)
+[Moogodb]()
 
 ### 开发环境介绍
 
@@ -122,7 +125,7 @@ input(type='text',placeholder='#{name}')
 a(href='/user/'+user.id)= user.name
 ```
 
-### 注释
+#### 注释
 
 + 注释分为输出的和不输出的，单行的和块 // //-
 + 还支持条件注释
@@ -231,3 +234,91 @@ body
 ```
 
 #### shell 中的makefile文件
+
+### 设计数据库模型 mongoose
+
++ 相关概念 Schema/Model/Documents(模式/模型/文档) --> Mongoose --> Mongodb
++ Schema 模式定义  在模式里面设置外部变量在数据库里存储的数据类型
+
+```
+var mogoose=require('mongoose');
+//在模式里面设置外部变量的数据类型
+var MovieSchema = new mongoose.Schema({
+	doctor:String,
+	title:String,
+	language:String,
+	country:String,
+	year:Number,
+	summary:String
+})
+```
+
++ Model 编译模型
+
+```
+var mongoose=require('mongoose');
+var MovieSchema = require(../schemas/movie);
+
+var Movie=mongoose.model(
+	'Movie',
+	'MovieSchema'
+)
+module.exports = Movie
+```
+
++ Documents 文档实例化
+
+```
+var Movie =require('./models/movie')
+var movie=new Movie({
+	title:'机械战警',
+	doctor:'詹姆斯·卡梅隆',
+	year:2008
+})
+movie.save(function(err){
+	if(err) return handleError(err)
+})
+```
+
+#### 数据库查询
+
++ 数据库批量查询
+
+```
+var Movie=require('./models/movie')
+app.get('/',function(req,res){
+	Movie
+		.find({})
+		.exec(function(err,movies){
+			res.render('index',{
+				title:'Film 首页',
+				movies:movies
+			})
+		})
+})
+```
+
++ 数据库单条查询
+
+```
+Movie
+//传入一个指定的key
+	.findOne({_id:id})
+	.exec(function(err,movies){
+		res.render('index',{
+			title:'ss',
+			movies:movies
+		})
+	})
+```
+
++ 数据库单条数据的删除
+
+```
+//直接调模型的remove()方法
+Movie.remove({_id:id},function(err,movie){
+	if(err){
+		console.log(err);
+	}
+})
+```
