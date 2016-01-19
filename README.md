@@ -237,6 +237,20 @@ body
 
 ### 设计数据库模型 mongoose
 
+#### 数据库安装与使用
+
++ 命令行使用
+
+```
+mongo
+use imooc
+db.movies.find({})
+db.movies.find({}).count()
+db.movies.remove()
+```
+
+#### 导入程序
+
 + 相关概念 Schema/Model/Documents(模式/模型/文档) --> Mongoose --> Mongodb
 + Schema 模式定义  在模式里面设置外部变量在数据库里存储的数据类型
 
@@ -253,7 +267,7 @@ var MovieSchema = new mongoose.Schema({
 })
 ```
 
-+ Model 编译模型
++ Model 编译模型 与数据库交互
 
 ```
 var mongoose=require('mongoose');
@@ -322,3 +336,10 @@ Movie.remove({_id:id},function(err,movie){
 	}
 })
 ```
+
+#### 项目完善
+
++ .bowerrc 配置文件,可以指定bower安装时的路径,去掉原先默认的的bower_components 文件夹
++ 对于的引入这些文件的标签路径也要改, href='/libs/../..'
++ 在public里面新增自己写的js文件,admin.js,处理删除的逻辑,(为什么不在后台处理？)
++ 生成一个配置文件,避免别人拷贝此项目时不用拷贝bower_components文件里面的内容,bower init.还有对于的后端的配置文件 npm init。 对于的2个文件是bower.json package.json
