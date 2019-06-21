@@ -67,6 +67,9 @@ app.post('/file_upload',function(req,res){
 	});
 
 });
+
+// 下面是登录的路由，get请求，返回一个登录页面
+// xxxxx
 var server=app.listen(8000,'127.0.0.1',function(){
 	var host=server.address().address;
 	var port=server.address().port;
